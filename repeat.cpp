@@ -3,13 +3,13 @@ Multithreadded variant of repeat script.
 Repeats a message a given number of times.
 If no number of times is provided, repeats msg indefinitly.
 Feb. 21, 2019
+Sept. 29 2021 - Removed progutil dependency
 */
 #include <iostream>
 #include <cstring>
 #include <stdlib.h>
 #include <thread>
 #include <pthread.h>
-#include <progutil.h>
 #define HELP_MSG "Usage: repeat <msg> <[times]>\nRepeats msg a given number of times. If no number of times is given, repeats msg indefinitly.\n"
 
 typedef char byte;
@@ -39,10 +39,20 @@ void* worker_repeat(void* threadInf) {
 			std::cout << toPrint << std::flush;
 		}
 	}
+	return NULL;
 }
 
 int main(int argc, char* argv[]) {
-	if(!checkInputs(argc, argv, 2, HELP_MSG)) return 0;
+	if (argc < 2) {
+		printf(HELP_MSG);
+		return 1;
+	}
+	for (int i = 1; i < argc; i++) {
+		if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
+			printf(HELP_MSG);
+			return 1;
+		}
+	}
 	char* toRepeat = argv[1];
 	unsigned long long times = 0;
 	if(argc > 2) times = atoll(argv[2]);

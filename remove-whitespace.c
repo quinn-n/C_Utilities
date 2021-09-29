@@ -1,10 +1,10 @@
 /*
 Removes whitespace after files.
 Written by Quinn Neufeld
+Sept. 29 2021 - Removed progutil dependency
 */
 #include <stdio.h>
 #include <string.h>
-#include <progutil.h>
 #include <arrayutils.h>
 #include <ctype.h>
 #define HELP_MSG "Usage: remove-whitespace <file>\nRemoves extra whitespace after a text file.\n"
@@ -41,7 +41,16 @@ char* removeEndWhitespaces(char* str) {
 }
 
 int main(int argc, char** argv) {
-  if(!checkInputs(argc, argv, 2, HELP_MSG)) return 0;
+  if (argc < 2) {
+    printf(HELP_MSG);
+    return 1;
+  }
+  for (int i = 1; i < argc; i++) {
+    if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
+      printf(HELP_MSG);
+      return 1;
+    }
+  }
   char* fpath = argv[1];
   FILE* fi = fopen(fpath, "r");
   char* filestr = readFile(fi);

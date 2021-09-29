@@ -7,11 +7,19 @@ Feb. 21 2019
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <progutil.h>
 #define HELP_MSG "Usage: convert-char <char(s)> converts character(s) to a unicode number, then outputs the result.\n"
 
 int main(int argc, char* argv[]) {
-  if (!checkInputs(argc, argv, 2, HELP_MSG)) return 0;
+  if (argc < 2) {
+    printf(HELP_MSG);
+    return 1;
+  }
+  for (int i = 1; i < argc; i++) {
+    if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
+      printf(HELP_MSG);
+      return 1;
+    }
+  }
   size_t numChars = strlen(argv[1]);
   char* chars = argv[1];
   for(size_t i = 0; i < numChars; i++) {

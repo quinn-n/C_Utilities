@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <math.h>
-#include <progutil.h>
+#include <string.h>
 #define HELP_MSG "Usage: fractions <num>\nConverts a decimal number to a fraction.\n"
 
 bool isInt(double num) {
@@ -19,8 +19,15 @@ int* getFract(double num) {
 }
 
 int main(int argc, char* argv[]) {
-	if(!checkInputs(argc, argv, 2, HELP_MSG)) {
-		return 0;
+	if (argc < 2) {
+		printf(HELP_MSG);
+		return 1;
+	}
+	for (int i = 1; i < argc; i++) {
+		if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
+			printf(HELP_MSG);
+			return 1;
+		}
 	}
 	double num = atof(argv[1]);
 	int* output = getFract(num);
