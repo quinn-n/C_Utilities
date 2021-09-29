@@ -4,7 +4,7 @@
 #include <thread>
 #include <cmath>
 #include <cstdlib>
-#include <progutil.h>
+#include <cstring>
 
 #define ISINT_TOLERANCE .00000001
 
@@ -81,8 +81,16 @@ double getFract(double num) {
 }
 
 int main(int argc, char** argv) {
-    if (!checkInputs(argc, argv, 2, (char*) HELP_MSG))
+    if (argc < 2) {
+        printf(HELP_MSG);
         return 1;
+    }
+    for (int i = 1; i < argc; i++) {
+        if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
+            printf(HELP_MSG);
+            return 1;
+        }
+    }
     double num = atof(argv[1]);
     double denom = getFract(num);
     std::cout << num * denom << " / " << denom << std::endl;
