@@ -12,9 +12,9 @@ typedef struct APPEND_ARGS {
 	int n_threads;
 } append_args;
 
-void append(std::fstream* fi, append_args args) {
+void append(append_args args) {
 	for (long i = args.tid; i < args.times; i += args.n_threads)
-		*fi << args.to_append;
+		*args.fi << args.to_append;
 }
 
 int main(int argc,char* argv[]){
