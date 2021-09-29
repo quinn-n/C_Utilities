@@ -5,8 +5,8 @@ Sept. 29 2021 - Removed progutil dependency
 */
 #include <stdio.h>
 #include <string.h>
-#include <arrayutils.h>
 #include <ctype.h>
+#include <stdlib.h>
 #define HELP_MSG "Usage: remove-whitespace <file>\nRemoves extra whitespace after a text file.\n"
 #define BUFF_SIZE 4096
 
