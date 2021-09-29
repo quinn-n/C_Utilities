@@ -10,7 +10,7 @@ def all():
     if not os.path.exists("./bin"):
         os.mkdir("bin")
     os.system(CPP_COMPILER + " len.cpp -o bin/len -O3")
-    os.system(CPP_COMPILER + " mass_append.cpp -o bin/mass-append -O3 -lpthread")
+    os.system(CPP_COMPILER + " mass_append.cpp -o bin/mass_append -O3 -lpthread")
     os.system(CPP_COMPILER + " generateString.cpp -o bin/generateString -O3")
     os.system(CPP_COMPILER + " repeat.cpp -o bin/repeat -lpthread -O3")
     os.system(CPP_COMPILER + " choose.cpp -o bin/choose -O3")
